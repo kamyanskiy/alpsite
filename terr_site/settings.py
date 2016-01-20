@@ -389,3 +389,8 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+DEBUG = True
+
+# Make these unique, and don't share it with anybody.
+SECRET_KEY = "%hl6sk15(#@57lo3aci_u0s8^)nd@e3e#idgq38sq_5=r%gge_"
+NEVERCACHE_KEY = "dtk_*1k1s(1hz#0mbhjhx$ya9^o37xvzy%dxvnfwekzkpl!v9_"
