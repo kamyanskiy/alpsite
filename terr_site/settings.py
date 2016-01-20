@@ -4,6 +4,7 @@ import os
 
 from django import VERSION as DJANGO_VERSION
 from django.utils.translation import ugettext_lazy as _
+import dj_database_url
 
 
 ######################
@@ -92,7 +93,10 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+
+# Domains for public site
+ALLOWED_HOSTS = [""]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -140,12 +144,35 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 # DATABASES #
 #############
 
+# DATABASES = {
+#     "default": {
+#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+#         "ENGINE": "django.db.backends.",
+#         # DB name or path to database file if using sqlite3.
+#         "NAME": "",
+#         # Not used with sqlite3.
+#         "USER": "",
+#         # Not used with sqlite3.
+#         "PASSWORD": "",
+#         # Set to empty string for localhost. Not used with sqlite3.
+#         "HOST": "",
+#         # Set to empty string for default. Not used with sqlite3.
+#         "PORT": "",
+#     }
+# }
+
+# Heroku postgresql db
+# DATABASES['default'] = dj_database_url.config()
+# Enable Persistent Connections
+# DATABASES['default']['CONN_MAX_AGE'] = 500
+
+
 DATABASES = {
     "default": {
-        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.",
+        # Ends with "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.sqlite3",
         # DB name or path to database file if using sqlite3.
-        "NAME": "",
+        "NAME": "dev.db",
         # Not used with sqlite3.
         "USER": "",
         # Not used with sqlite3.
@@ -229,7 +256,6 @@ if DJANGO_VERSION < (1, 9):
 ################
 # APPLICATIONS #
 ################
-
 INSTALLED_APPS = (
     "django.contrib.admin",
     "django.contrib.auth",
@@ -251,7 +277,9 @@ INSTALLED_APPS = (
     # "mezzanine.accounts",
     # "mezzanine.mobile",
     "terr_site",
+
 )
+
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
@@ -292,7 +320,7 @@ PACKAGE_NAME_GRAPPELLI = "grappelli_safe"
 
 # These will be added to ``INSTALLED_APPS``, only if available.
 OPTIONAL_APPS = (
-    "debug_toolbar",
+    # "debug_toolbar",
     "django_extensions",
     "compressor",
     PACKAGE_NAME_FILEBROWSER,
@@ -338,3 +366,26 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
