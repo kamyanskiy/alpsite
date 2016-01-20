@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load mezzanine_tags blog_tags docpage_tags i18n future %}
+
+
+{% block meta_title %}{% trans "Home" %}{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
+
+
+{% block breadcrumb_menu %}{% endblock %}
+
+
+{% block main %}
+{% blocktrans %}
+
+<h2 class="text-center">Добро пожаловать</h2>
+<div class="home_logo"></div>
+<p>Сайт задуман как место для сохранения информации в виде статей и записей.</p>
+
+{% endblocktrans %}
+
+
+{% endblock %}
+
+{% block right_panel %}
+
+{% docpage_recent_articles 5 as articles %}
+{% if articles %}
+<h3>{% trans "Recent Docs" %}</h3>
+<ul class="unstyled recent-posts">
+{% for article in articles %}
+<li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+
+{% block blog_recent_posts %}
+{% blog_recent_posts 5 as recent_posts %}
+{% if recent_posts %}
+<h3>{% trans "Recent Posts" %}</h3>
+<ul class="unstyled recent-posts">
+{% for recent_post in recent_posts %}
+<li><a href="{{ recent_post.get_absolute_url }}">{{ recent_post.title }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% endblock %}
