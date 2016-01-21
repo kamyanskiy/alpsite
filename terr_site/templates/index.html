@@ -22,7 +22,8 @@
 {% endblock %}
 
 {% block right_panel %}
-
+<div class="panel panel-default right-panel">
+<div class="right-panel-content">
 {% docpage_recent_articles 5 as articles %}
 {% if articles %}
 <h3>{% trans "Recent Docs" %}</h3>
@@ -45,5 +46,6 @@
 </ul>
 {% endif %}
 {% endblock %}
-
+</div>
+</div>
 {% endblock %}

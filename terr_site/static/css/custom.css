@@ -1,5 +1,35 @@
+body {
+    background: url(/static/img/body_background.png);
+}
+
+footer {
+    border-top: 0;
+    background-color: transparent;
+}
+
+.navbar-default {
+    background-color: #072940;
+    background-image: none;
+
+}
+
+.breadcrumb {
+    background-color: #D5EAEA;
+}
+
+.right-panel {
+    background-color: rgba(116, 140, 152, 0.08);
+}
+
+.right-panel-content {
+    margin-left: 10px;
+}
+
 div.home_logo {
   background: url(/static/img/panorama.jpg);
   width: 850px;
   height: 250px;
+  border: solid, transparent;
+  border-radius: 4px;
 }
+

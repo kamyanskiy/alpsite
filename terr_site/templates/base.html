@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
 {% endif %}
 {% endifinstalled %}
-<link rel="stylesheet" href="{% static "css/custom.css" %}">
+
 {% block extra_css %}{% endblock %}
 {% endcompress %}
 
@@ -46,6 +46,7 @@
 <![endif]-->
 
 {% block extra_head %}{% endblock %}
+<link rel="stylesheet" href="{% static "css/custom.css" %}">
 </head>
 
 <body id="{% block body_id %}body{% endblock %}">
@@ -84,11 +85,6 @@
 
 <h1>{% block title %}{% endblock %}</h1>
 
-<ul class="breadcrumb">
-{% spaceless %}
-{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
-{% endspaceless %}
-</ul>
 
 </div>
 
